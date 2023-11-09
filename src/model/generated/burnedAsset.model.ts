@@ -3,38 +3,39 @@ import * as marshal from "./marshal"
 import {Account} from "./account.model"
 
 @Entity_()
-export class Transfer {
-    constructor(props?: Partial<Transfer>) {
+export class BurnedAsset {
+    constructor(props?: Partial<BurnedAsset>) {
         Object.assign(this, props)
     }
 
     @PrimaryColumn_()
     id!: string
 
+    /**
+     * Block number when the asset was burned
+     */
     @Index_()
     @Column_("int4", {nullable: false})
     blockNumber!: number
 
+    /**
+     * Timestamp when the asset was burned
+     */
     @Index_()
     @Column_("timestamp with time zone", {nullable: false})
     timestamp!: Date
 
-    @Index_()
-    @Column_("text", {nullable: true})
-    extrinsicHash!: string | undefined | null
-
-    @Index_()
-    @ManyToOne_(() => Account, {nullable: true})
-    from!: Account
-
+    /**
+     * The account from which the asset was burned
+     */
     @Index_()
     @ManyToOne_(() => Account, {nullable: true})
-    to!: Account
+    owner!: Account
 
+    /**
+     * Balance of the asset after it was burned
+     */
     @Index_()
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    amount!: bigint
-
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    fee!: bigint
+    balance!: bigint
 }

@@ -1,32 +1,24 @@
 import {sts, Block, Bytes, Option, Result, EventType, RuntimeCtx} from '../support'
-import * as v1020 from '../v1020'
-import * as v1050 from '../v1050'
-import * as v9130 from '../v9130'
+import * as v900 from '../v900'
+import * as v1201 from '../v1201'
 
 export const transfer =  {
     name: 'Balances.Transfer',
     /**
-     *  Transfer succeeded (from, to, value, fees).
+     * Transfer succeeded. \[from, to, value\]
      */
-    v1020: new EventType(
+    v900: new EventType(
         'Balances.Transfer',
-        sts.tuple([v1020.AccountId, v1020.AccountId, v1020.Balance, v1020.Balance])
-    ),
-    /**
-     *  Transfer succeeded (from, to, value).
-     */
-    v1050: new EventType(
-        'Balances.Transfer',
-        sts.tuple([v1050.AccountId, v1050.AccountId, v1050.Balance])
+        sts.tuple([v900.H160, v900.H160, sts.bigint()])
     ),
     /**
      * Transfer succeeded.
      */
-    v9130: new EventType(
+    v1201: new EventType(
         'Balances.Transfer',
         sts.struct({
-            from: v9130.AccountId32,
-            to: v9130.AccountId32,
+            from: v1201.AccountId20,
+            to: v1201.AccountId20,
             amount: sts.bigint(),
         })
     ),

@@ -1,6 +1,6 @@
 {
   "outDir": "src/types",
-  "specVersions": "https://v2.archive.subsquid.io/metadata/kusama",
+  "specVersions": "https://v2.archive.subsquid.io/metadata/moonbeam",
   "pallets": {
     "Balances": {
       "events": [

@@ -3,6 +3,7 @@ type Account @entity {
   id: ID!
   transfersTo: [Transfer!] @derivedFrom(field: "to")
   transfersFrom: [Transfer!] @derivedFrom(field: "from")
+  issuedAssets: [IssuedAsset!] @derivedFrom(field: "owner")
 }
 
 type Transfer @entity {
@@ -15,3 +16,39 @@ type Transfer @entity {
   amount: BigInt! @index
   fee: BigInt! # fee is calculated at the best effort and may be zero for some old extrinsics
 }
+
+type IssuedAsset @entity {
+  id: ID!
+  "Block number when the asset was issued"
+  blockNumber: Int! @index
+  "Timestamp when the asset was issued"
+  timestamp: DateTime! @index
+  "The account to which the asset was issued"
+  owner: Account!
+  "Amount of the asset issued"
+  amount: BigInt! @index
+}
+
+type BurnedAsset @entity {
+  id: ID!
+  "Block number when the asset was burned"
+  blockNumber: Int! @index
+  "Timestamp when the asset was burned"
+  timestamp: DateTime! @index
+  "The account from which the asset was burned"
+  owner: Account!
+  "Balance of the asset after it was burned"
+  balance: BigInt! @index
+}
+
+type NetSupply @entity {
+  "Primary key, typically the block number"
+  id: ID!
+
+  "Block number when the net supply was calculated"
+  blockNumber: Int! @index
+
+  "Net supply of assets after this block"
+  netSupply: BigInt! @index
+}
+
