@@ -1,3 +1,15 @@
+
+# XCDOT Indexer Instructions to Run 
+
+* sqd down
+* sqd up
+* sqd typegen
+* sqd codegen
+* sqd migration:generate
+* sqd migration:apply
+* sqd process
+
+
 # Squid template project
 
 A starter [Squid](https://subsquid.io) project to demonstrate its structure and conventions.
